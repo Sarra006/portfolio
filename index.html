@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Sarra EL FAIEZ – Data Scientist</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#14122b;--card:rgba(16,20,48,.86);--ink:#eef3ff;--mut:#a9b6dd;--acc:#7fc8f8;--hot:#ffb454;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--card:rgba(16,20,48,.86)}}
+:root[data-theme="dark"]{--card:rgba(16,20,48,.86)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 "DM Sans",system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+#c{position:fixed;inset:0;width:100%;height:100%;image-rendering:pixelated;z-index:0}
+header{position:fixed;top:0;left:0;right:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:calc(env(safe-area-inset-top,0px) + 12px) 18px 12px;pointer-events:none}
+header>*{pointer-events:auto}
+.lo{font:700 18px Silkscreen,monospace;color:var(--acc)}
+nav{display:flex;gap:10px}
+nav a{width:12px;height:12px;background:#3b4680;border:2px solid #0008;transition:.2s}
+nav a.on{background:var(--hot);transform:scale(1.35)}
+#lg{font:700 13px Silkscreen,monospace;background:var(--acc);color:#10143a;border:0;padding:7px 12px;cursor:pointer;box-shadow:3px 3px 0 #000a}
+#lg:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,button:focus-visible{outline:3px solid var(--hot);outline-offset:2px}
+main{position:relative;z-index:2}
+.sc{height:160vh;position:relative}
+.card{position:sticky;top:15vh;margin-left:5vw;width:min(450px,90vw);padding:20px 22px;background:var(--card);border:3px solid var(--acc);box-shadow:7px 7px 0 #000a;backdrop-filter:blur(6px);opacity:0;transform:translateY(24px);transition:opacity .35s,transform .35s}
+.sc.on .card{opacity:1;transform:none}
+body.sw .sc.on .card{opacity:0}
+#hint{position:fixed;right:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);z-index:5;max-width:min(340px,70vw);font-size:12px;line-height:1.35;color:var(--mut);background:var(--card);border:2px solid #3b4680;padding:7px 11px;pointer-events:none;transition:opacity .8s}
+body.drag{cursor:grabbing;user-select:none}
+@media (pointer:coarse){#hint{display:none}}
+h1,h2{font-family:Silkscreen,monospace;margin:0 0 10px;line-height:1.1}
+h1{font-size:clamp(28px,4.4vw,44px);color:#fff}
+h2{font-size:24px;color:var(--hot)}
+h3{font-size:15px;margin:14px 0 4px;color:var(--acc)}
+h3 small{font-weight:400;color:var(--mut);margin-left:6px}
+p{margin:6px 0}ul{margin:4px 0;padding-left:18px}li{margin:3px 0}
+.mut{color:var(--mut)}
+.ch{display:inline-block;padding:2px 8px;margin:2px 3px 2px 0;border:2px solid var(--acc);font-size:12.5px}
+.big{color:var(--hot);font-weight:700}
+html[lang=fr] [lang=en],html[lang=en] [lang=fr]{display:none!important}
+form{display:grid;gap:8px;margin-top:10px}
+label{display:grid;gap:2px;font-size:12.5px;color:var(--mut)}
+input,textarea{font:inherit;color:var(--ink);background:#0b0e2a;border:2px solid #3b4680;padding:7px 9px}
+textarea{min-height:70px;resize:vertical}
+.btn{font:700 13px Silkscreen,monospace;background:var(--hot);color:#241500;border:0;padding:10px;cursor:pointer;box-shadow:3px 3px 0 #000a}
+.ct{display:flex;align-items:center;gap:12px;margin:9px 0;color:var(--ink);text-decoration:none}
+.ct svg{flex:none;width:36px;height:36px;padding:7px;border:2px solid var(--acc);color:var(--acc);background:#0b0e2a;box-shadow:3px 3px 0 #000a}
+a.ct:hover span{color:var(--hot)}
+#s1{height:340vh}#s3{height:520vh}#s5{height:230vh}#s3 .card{width:min(580px,92vw);font-size:14px;top:11vh}
+.pg{display:none}.pg.on{display:block}.pn{font:700 12px Silkscreen,monospace;color:var(--mut);margin:0 0 2px}
+a{color:var(--acc)}
+@media (max-width:900px){.card{top:46vh;margin:0 auto;max-height:50vh;overflow:auto;padding:14px 16px;font-size:13.5px}h1{font-size:26px}h2{font-size:20px}}
+</style>
+</head>
+<body>
+<canvas id="c" aria-label="Scène 3D voxel"></canvas>
+<header>
+ <b class="lo">SEF</b>
+ <nav aria-label="Sections"><a href="#s0" title="Intro"></a><a href="#s1" title="Experience"></a><a href="#s2" title="Skills"></a><a href="#s3" title="Projects"></a><a href="#s4" title="Education"></a><a href="#s5" title="Contact"></a></nav>
+ <button id="lg" aria-label="Changer de langue / Switch language">EN</button>
+</header>
+<main>
+<section class="sc" id="s0"><div class="card">
+ <h1>Sarra EL FAIEZ</h1>
+ <p class="big">Data Scientist – Machine Learning, Data Quality, Industrialisation</p>
+ <p lang="fr">Ingénieure IA & Data Science diplômée en décembre 2026. Je transforme des données brutes et bruitées en modèles fiables, déployés et utiles aux métiers : de la préparation des données jusqu’à l’API et à la mesure de l’impact.</p>
+ <p lang="en">AI & Data Science engineer graduating in December 2026. I turn raw, noisy data into reliable models that are deployed and useful to the business: from data preparation to the API and impact measurement.</p>
+ <p class="mut" lang="fr">Scrollez pour remettre de l’ordre dans ce chaos ↓</p><p class="mut" lang="en">Scroll to bring order to this chaos ↓</p>
+</div></section>
+
+<section class="sc" id="s1"><div class="card">
+ <h2 lang="fr">Expériences</h2><h2 lang="en">Experience</h2>
+ <h3>Deep Knowledge <small>Data Scientist – 05/2026–11/2026</small></h3>
+ <ul lang="fr"><li>Data leakage détecté sur une base d’imagerie médicale : <b>42,27 %</b> de doublons supprimés, découpage inter-patients (CLIP, UMAP, HDBSCAN).</li><li>Benchmark de plusieurs générations de YOLO : <b>50,1 %</b> de mAP@50, latence optimisée.</li><li>Chaîne IA d’aide au diagnostic sur 16000 radiographies et outil d’annotation pour un expert médical.</li></ul>
+ <ul lang="en"><li>Data leakage found in a medical imaging set: <b>42.27%</b> duplicates removed, patient-level split (CLIP, UMAP, HDBSCAN).</li><li>Benchmark of several YOLO generations: <b>50.1%</b> mAP@50, optimised latency.</li><li>AI diagnostic-support pipeline on 16,000 X-rays and an annotation tool for a medical expert.</li></ul>
+ <h3>S2i <small>Data Scientist – 07/2025–08/2025</small></h3>
+ <ul lang="fr"><li>NLP hybride TF-IDF/SVM + CamemBERT pour le support client, exposé via FastAPI en moins de 0,1 s : <b>−25 %</b> d’escalades vers les agents.</li></ul>
+ <ul lang="en"><li>Hybrid TF-IDF/SVM + CamemBERT NLP for customer support, served via FastAPI in under 0.1 s: <b>−25%</b> escalations to human agents.</li></ul>
+</div></section>
+
+<section class="sc" id="s2"><div class="card">
+ <h2 lang="fr">Compétences</h2><h2 lang="en">Skills</h2>
+ <h3>Data science & ML</h3><span class="ch">Python</span><span class="ch">Pandas</span><span class="ch">NumPy</span><span class="ch">Scikit-learn</span><span class="ch">Clustering</span><span class="ch">Benchmarking</span>
+ <h3>Deep learning</h3><span class="ch">PyTorch</span><span class="ch">TensorFlow</span><span class="ch">Keras</span><span class="ch">CNN</span><span class="ch">GRU / LSTM</span><span class="ch">YOLO</span>
+ <h3>Data quality</h3><span class="ch">Leakage detection</span><span class="ch">Bootstrap</span><span class="ch">Statistical validation</span>
+ <h3 lang="fr">Industrialisation</h3><h3 lang="en">Industrialisation</h3><span class="ch">FastAPI</span><span class="ch">Docker</span><span class="ch">MLflow</span><span class="ch">Git</span><span class="ch">Linux</span><span class="ch">Streamlit</span><span class="ch">Azure</span>
+ <p class="mut" lang="fr">Français C1, anglais TOEIC 950, arabe natif.</p><p class="mut" lang="en">French C1, English TOEIC 950, Arabic native.</p>
+</div></section>
+
+<section class="sc" id="s3"><div class="card"><h2 lang="fr">Projets</h2><h2 lang="en">Projects</h2><p class="pn" id="pn">1 / 5</p><div class="pg on"><h3 lang="fr">Système de recommandation à grande échelle – GenAI & LangGraph <small>04/2026–05/2026</small></h3><h3 lang="en">Large-scale recommender system – GenAI & LangGraph <small>04/2026–05/2026</small></h3><ul lang="fr"><li>Reproduction expérimentale de l’article « Multi-Agent Collaborative Filtering: Orchestrating Users and Items for Agentic Recommendations » sur Amazon Video Games, combinant Llama 3.3, LangGraph, FAISS et Sentence-Transformers.</li><li>Traitement de 4,6 millions d’avis et orchestration d’agents Users/Items pour automatiser une problématique de recommandation complexe.</li><li>Évaluation expérimentale via HitRatio, DCG et Close-Hits, avec analyse de la sensibilité aux formulations des requêtes et au prompting.</li></ul><ul lang="en"><li>Experimental reproduction of the paper “Multi-Agent Collaborative Filtering: Orchestrating Users and Items for Agentic Recommendations” on Amazon Video Games, combining Llama 3.3, LangGraph, FAISS and Sentence-Transformers.</li><li>Processing of 4.6 million reviews and orchestration of User/Item agents to automate a complex recommendation problem.</li><li>Experimental evaluation with HitRatio, DCG and Close-Hits, plus a sensitivity analysis on query wording and prompting.</li></ul><p class="mut">Technologies : Python, LangGraph, LangChain, Llama 3.3 / Groq, FAISS, Sentence-Transformers, Pandas, Parquet, Prompt Engineering</p><h3 lang="fr">NLP & Text Mining multimodal – Clustering & Validation <small>04/2026–05/2026</small></h3><h3 lang="en">Multimodal NLP & Text Mining – Clustering & Validation <small>04/2026–05/2026</small></h3><ul lang="fr"><li>Nettoyage et vectorisation de 31 014 images et 155 070 descriptions, combinant représentations textuelles et visuelles.</li><li>Benchmark de plusieurs approches de clustering multi-vues avec réduction de dimension et validation statistique par bootstrap.</li><li>Amélioration du score Silhouette de 0,054 à 0,338, avec identification de 10 clusters interprétables.</li></ul><ul lang="en"><li>Cleaning and vectorisation of 31,014 images and 155,070 descriptions, combining textual and visual representations.</li><li>Benchmark of several multi-view clustering approaches with dimensionality reduction and statistical validation by bootstrap.</li><li>Silhouette score improved from 0.054 to 0.338, with 10 interpretable clusters identified.</li></ul><p class="mut">Technologies : Python, Seaborn, NLP, SBERT, GloVe, Word2Vec, FastText, ResNet-50, K-Means, O2MAC, MVSC, CoNMF, LMKKM, UMAP, t-SNE</p></div><div class="pg"><h3 lang="fr">Assistant documentaire multimodal – GraphRAG, OCR & Vision-Language Models <small>01/2026–03/2026</small></h3><h3 lang="en">Multimodal document assistant – GraphRAG, OCR & Vision-Language Models <small>01/2026–03/2026</small></h3><ul lang="fr"><li>Conception d’un assistant capable d’extraire et structurer des documents complexes associant texte, tableaux et diagrammes via PyMuPDF, OCR et Qwen2.5-VL.</li><li>Développement d’une recherche hybride combinant FAISS et graphe de connaissances, avec traçabilité des sources et garde-fous visant à limiter les erreurs d’interprétation.</li></ul><ul lang="en"><li>Design of an assistant that extracts and structures complex documents mixing text, tables and diagrams with PyMuPDF, OCR and Qwen2.5-VL.</li><li>Hybrid search combining FAISS and a knowledge graph, with source traceability and guardrails to limit interpretation errors.</li></ul><p class="mut">Technologies : Python, FAISS, NetworkX, Qwen2.5-VL, Phi-3, CamemBERT, LangChain</p><h3 lang="fr">Stationnement intelligent & métrologie 3D (Computer Vision) <small>12/2025–05/2026</small></h3><h3 lang="en">Smart parking & 3D metrology (Computer Vision) <small>12/2025–05/2026</small></h3><ul lang="fr"><li>Détection automatisée de places de stationnement libres et mesure de leur accessibilité physique en voirie.</li><li>Détection d’objets ouverts par YOLO-World couplée à l’estimation de profondeur Depth Anything V2 et calibration photométrique.</li><li>Mesure en mètres des créneaux disponibles avec une marge d’erreur inférieure à 0,69 m en longueur et 0,25 m en largeur.</li></ul><ul lang="en"><li>Automated detection of free parking spots and measurement of their physical accessibility on the street.</li><li>Open-vocabulary detection with YOLO-World coupled with Depth Anything V2 depth estimation and photometric calibration.</li><li>Available spaces measured in metres with an error margin below 0.69 m in length and 0.25 m in width.</li></ul><p class="mut">Technologies : Python, YOLO-World, Depth Anything V2, OpenCV, NumPy</p></div><div class="pg"><h3 lang="fr">Détection précoce de la maladie de Parkinson (séries temporelles audio) <small>11/2025–12/2025</small></h3><h3 lang="en">Early Parkinson’s disease detection (audio time series) <small>11/2025–12/2025</small></h3><ul lang="fr"><li>Classification automatisée à partir d’enregistrements de biomarqueurs vocaux (UCI Dataset), surpassant l’étude de référence (Little et al.).</li><li>Entraînement de réseaux récurrents (GRU/LSTM) sur la dynamique intra-patient et extraction du descripteur PPE.</li><li>Recall clinique de 85,7 % (vs 76 % pour la baseline SVM), limitant le taux de faux négatifs, critique en diagnostic préliminaire.</li></ul><ul lang="en"><li>Automated classification from vocal biomarker recordings (UCI dataset), outperforming the reference study (Little et al.).</li><li>Recurrent networks (GRU/LSTM) trained on intra-patient dynamics, with PPE descriptor extraction.</li><li>Clinical recall of 85.7% (vs 76% for the SVM baseline), significantly limiting false negatives, which are critical in preliminary diagnosis.</li></ul><p class="mut">Technologies : TensorFlow, Keras, Scikit-learn, Pandas</p><h3 lang="fr">Prédiction du lupus rénal chez les patients tunisiens (Habib Thameur) <small></small></h3><h3 lang="en">Renal lupus prediction in Tunisian patients (Habib Thameur) <small></small></h3><ul lang="fr"><li>Modèle prédictif basé sur des données médicales anonymisées fournies par les médecins internistes.</li><li>Analyse statistique des facteurs de risque liés au lupus rénal.</li></ul><ul lang="en"><li>Predictive model built on anonymised medical data provided by internal-medicine physicians.</li><li>Statistical analysis of the risk factors linked to renal lupus.</li></ul><p class="mut">Technologies : Python, Pandas, Scikit-learn, Streamlit</p></div><div class="pg"><h3 lang="fr">Projet PDL – Évaluation de l’engagement des étudiants <small>03/2025–06/2025</small></h3><h3 lang="en">PDL project – Student engagement assessment <small>03/2025–06/2025</small></h3><ul lang="fr"><li>Détection de l’engagement des étudiants en classe via leurs expressions faciales.</li><li>Approches classiques de Machine Learning pour détecter les niveaux d’engagement.</li></ul><ul lang="en"><li>Detection of students’ engagement in class from their facial expressions.</li><li>Classical Machine Learning approaches to detect engagement levels.</li></ul><p class="mut">Technologies : Python, OpenCV, PCA</p><h3 lang="fr">Projet MLOps – Détection des tumeurs du cancer du sein <small>05/2025–06/2025</small></h3><h3 lang="en">MLOps project – Breast cancer tumour detection <small>05/2025–06/2025</small></h3><ul lang="fr"><li>Classification de tumeurs mammaires avec plusieurs algorithmes de Machine Learning (SVM, RandomForest, etc.).</li><li>Mise en place d’un pipeline MLOps pour l’entraînement et le déploiement du modèle.</li></ul><ul lang="en"><li>Classification of breast tumours with several Machine Learning algorithms (SVM, RandomForest, etc.).</li><li>MLOps pipeline for training and deploying the model.</li></ul><p class="mut">Technologies : Python, Scikit-learn, MLflow, Streamlit, Docker</p></div><div class="pg"><h3 lang="fr">Prédiction des prix des cryptomonnaies <small></small></h3><h3 lang="en">Cryptocurrency price prediction <small></small></h3><ul lang="fr"><li>Extraction de données par web scraping pour collecter des données réelles sur les cryptos.</li><li>Analyse et modélisation des prix à l’aide d’algorithmes de Machine Learning.</li></ul><ul lang="en"><li>Data extraction through web scraping to collect real crypto data.</li><li>Price analysis and modelling with Machine Learning algorithms.</li></ul><p class="mut">Technologies : Python, Selenium, Pandas, Scikit-learn, React, FastAPI</p></div></div></section>
+
+<section class="sc" id="s4"><div class="card">
+ <h2 lang="fr">Formation</h2><h2 lang="en">Education</h2>
+ <h3 lang="fr">Diplôme d’ingénieur IA & Data Science <small>2021–12/2026</small></h3><h3 lang="en">Engineering degree, AI & Data Science <small>2021–12/2026</small></h3>
+ <p>Université Privée SESAME, Tunis</p>
+ <h3 lang="fr">Année d’échange, ING3 Data Science <small>2025–2026</small></h3><h3 lang="en">Exchange year, ING3 Data Science <small>2025–2026</small></h3>
+ <p>CY Tech (ex-EISTI), Cergy</p>
+ <h3>Certifications</h3><span class="ch">Azure AI Fundamentals (AI-900) – Microsoft</span><span class="ch">Generative AI with Diffusion Models – NVIDIA Deep Learning Institute</span><span class="ch">Building Transformer-Based NLP Applications – NVIDIA Deep Learning Institute</span><span class="ch">Getting Started with Deep Learning – NVIDIA Deep Learning Institute</span><span class="ch">Hands-On Essentials: Data Warehousing Workshop – Snowflake</span>
+</div></section>
+
+<section class="sc" id="s5"><div class="card">
+ <h2 lang="fr">Contact</h2><h2 lang="en">Contact</h2>
+ <p lang="fr">Disponible dès janvier 2027 pour un CDI. Parlons de vos données.</p><p lang="en">Available from January 2027 for a permanent role. Let’s talk about your data.</p>
+ <a class="ct" href="mailto:elfaiez.sarra@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14"/><path d="M3 6l9 7 9-7"/></svg><span>elfaiez.sarra@gmail.com</span></a><a class="ct" href="tel:+33759188655"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg><span>+33 7 59 18 86 55</span></a><div class="ct"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Pontoise, France</span></div><a class="ct" href="https://www.linkedin.com/in/sarra-el-faiez-2a447525b" id="li" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18"/><path d="M8 10v7M8 7v.01M12 17v-7M12 13a3 3 0 0 1 6 0v4"/></svg><span>LinkedIn</span></a>
+</div></section>
+</main>
+
+<div id="hint" aria-hidden="true"><span lang="fr">Clic droit + glisser : tourner la caméra · Clic molette + glisser : déplacer la vue</span><span lang="en">Right-click + drag: rotate the camera · Middle-click + drag: pan the view</span></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(()=>{
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],T3=THREE;
+const cl=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),sm=x=>x*x*(3-2*x),lp=(a,b,t)=>a+(b-a)*t;
+const R=new T3.WebGLRenderer({canvas:$('#c'),antialias:false});R.setPixelRatio(.7);
+const sc=new T3.Scene(),cam=new T3.PerspectiveCamera(45,1,.1,200);
+const BG0=new T3.Color(0x14122b),BG1=new T3.Color(0x4a78c0);sc.background=new T3.Color();sc.fog=new T3.Fog(0x14122b,28,80);
+sc.add(new T3.AmbientLight(0xffffff,.72));const dl=new T3.DirectionalLight(0xffffff,.8);dl.position.set(6,12,9);sc.add(dl);
+
+/* ---------- helpers voxel ---------- */
+const M={},mat=c=>M[c]||(M[c]=new T3.MeshLambertMaterial({color:c,flatShading:true}));
+const bx=(w,h,d,c,x=0,y=0,z=0,p)=>{const m=new T3.Mesh(new T3.BoxGeometry(w,h,d),mat(c));m.position.set(x,y,z);p&&p.add(m);return m};
+const LB=[];
+function label(fr,en,w=3.4,col='#ffffff',bg='#14183a',fs=30){const c=document.createElement('canvas');c.width=256;c.height=96;const x=c.getContext('2d'),t=new T3.CanvasTexture(c);t.minFilter=t.magFilter=T3.NearestFilter;
+ const s=new T3.Sprite(new T3.SpriteMaterial({map:t,transparent:true,depthWrite:false}));s.scale.set(w,w*.375,1);
+ s.set=v=>{x.clearRect(0,0,256,96);x.fillStyle=bg;x.fillRect(4,4,248,88);x.strokeStyle=col;x.lineWidth=6;x.strokeRect(4,4,248,88);x.fillStyle=col;x.font='bold '+fs+'px monospace';x.textAlign='center';x.textBaseline='middle';x.fillText(v,128,50);t.needsUpdate=true};
+ LB.push({s,fr,en:en||fr});return s}
+function scr(k,t,v){const c=document.createElement('canvas');c.width=320;c.height=200;const x=c.getContext('2d');
+ x.fillStyle='rgba(8,28,56,.88)';x.fillRect(0,0,320,200);x.strokeStyle='#7fe7ff';x.lineWidth=5;x.strokeRect(3,3,314,194);
+ x.fillStyle='#7fe7ff';x.font='bold 16px monospace';x.fillText(t,14,28);x.fillStyle='#ffb454';x.font='bold 34px monospace';x.fillText(v,14,70);
+ const r=n=>{r.s=(r.s*9301+49297)%233280;return r.s/233280*n};r.s=t.length*7;
+ if(k=='bars')for(let i=0;i<9;i++){const h=20+r(80);x.fillStyle=i==6?'#ffb454':'#7fc8f8';x.fillRect(20+i*32,185-h,22,h)}
+ if(k=='dots')for(let i=0;i<75;i++){const g=i%3;x.fillStyle=['#7fc8f8','#ffb454','#b3f27a'][g];x.fillRect([70,160,250][g]+r(50)-25,[140,115,145][g]+r(40)-20,6,6)}
+ if(k=='net'){const n=[...Array(12)].map(()=>[25+r(270),95+r(90)]);x.strokeStyle='#7fc8f8';x.lineWidth=2;n.forEach((p,i)=>{const q=n[(i+3)%12];x.beginPath();x.moveTo(p[0],p[1]);x.lineTo(q[0],q[1]);x.stroke()});x.fillStyle='#ffb454';n.forEach(p=>x.fillRect(p[0]-5,p[1]-5,10,10))}
+ if(k=='line'){x.strokeStyle='#b3f27a';x.lineWidth=4;x.beginPath();for(let i=0;i<10;i++){const y=170-i*7-r(18);i?x.lineTo(20+i*30,y):x.moveTo(20,y)}x.stroke()}
+ if(k=='donut'){let a=-1.57;['#7fc8f8','#ffb454','#b3f27a'].forEach((cc,i)=>{const d=[2.6,2,1.68][i];x.strokeStyle=cc;x.lineWidth=22;x.beginPath();x.arc(240,130,38,a,a+d);x.stroke();a+=d})}
+ const tx=new T3.CanvasTexture(c),m=new T3.Mesh(new T3.PlaneGeometry(4.4,2.75),new T3.MeshBasicMaterial({map:tx,transparent:true,side:T3.DoubleSide}));return m}
+
+/* ---------- personnages ---------- */
+function person(o){const g=new T3.Group(),S=o.skin||0xd9a27a,hc=o.hair||0x3a2314;
+ const leg=x=>{const p=new T3.Group();p.position.set(x,1.3,0);bx(.5,1.1,.5,o.pants||0x1b2342,0,-.55,0,p);bx(.52,.25,.7,0x111111,0,-1.15,.08,p);g.add(p);return p};
+ const L=leg(-.3),Rr=leg(.3);bx(1.4,1.4,.75,o.top,0,2,0,g);if(o.shirt)bx(.45,1.1,.05,0xffffff,0,2.1,.39,g);if(o.tie)bx(.16,.85,.05,o.tie,0,2.05,.42,g);
+ const arm=x=>{const p=new T3.Group();p.position.set(x,2.6,0);bx(.4,1.2,.42,o.top,0,-.55,0,p);bx(.38,.38,.38,S,0,-1.3,0,p);g.add(p);return p};
+ const A=arm(-.9),B=arm(.9),h=new T3.Group();h.position.y=3.15;g.add(h);
+ bx(1.15,1.15,1.05,S,0,.55,0,h);bx(.16,.2,.05,0x111111,-.28,.62,.53,h);bx(.16,.2,.05,0x111111,.28,.62,.53,h);bx(.4,.08,.05,0x8a3b3b,0,.25,.53,h);if(o.glasses){[-1,1].forEach(m=>{const c=m*.3;bx(.46,.05,.05,0x111111,c,.78,.56,h);bx(.46,.05,.05,0x111111,c,.46,.56,h);bx(.05,.37,.05,0x111111,c-.23,.62,.56,h);bx(.05,.37,.05,0x111111,c+.23,.62,.56,h);bx(.05,.05,.5,0x111111,m*.58,.64,.3,h)});bx(.14,.05,.05,0x111111,0,.64,.56,h)}
+ if(o.curly){const q=Math.random;for(let i=0;i<96;i++){const s=.3+q()*.25,c=q()<.3?0x4d2f1c:0x2e1a0e;let x,y,z;
+  if(i<30){x=(q()-.5)*1.7;y=1+q()*.5;z=(q()-.5)*1.3}else if(i<56){x=(q()<.5?-1:1)*(.55+q()*.25);y=-.5+q()*1.4;z=-.7+q()*.8}else{x=(q()-.5)*1.5;y=-.55+q()*1.5;z=-.62-q()*.12}bx(s,s,s,c,x,y,z,h)}bx(1.25,.3,.2,0x2e1a0e,0,1.08,.5,h)}
+ else{bx(1.25,.35,1.15,hc,0,1.2,0,h);bx(1.25,.8,.2,hc,0,.7,-.55,h)}
+ return{g,L,R:Rr,A,B,h}}
+const av=person({top:0x232f5c,shirt:1,curly:1,glasses:1});sc.add(av.g);
+const cap=new T3.Group();cap.position.y=1.55;bx(1.7,.12,1.7,0x111111,0,.2,0,cap);bx(1.2,.3,1.1,0x111111,0,0,0,cap);bx(.1,.5,.1,0xffc84a,.8,0,.8,cap);av.h.add(cap);
+const hc=new T3.Mesh(new T3.BoxGeometry(.55,.55,.55),new T3.MeshLambertMaterial({color:0xff5555}));hc.position.set(0,-1.7,.35);av.B.add(hc);
+
+/* ---------- bulles de dialogue (clients / compétences) ---------- */
+const SP=[];
+function speech(ww,src,fs=22,lw=28,W=400,f=.5){const c=document.createElement('canvas'),x=c.getContext('2d'),t=new T3.CanvasTexture(c);t.minFilter=t.magFilter=T3.NearestFilter;
+ const s=new T3.Sprite(new T3.SpriteMaterial({map:t,transparent:true,depthWrite:false,depthTest:false}));s.center.set(f,0);s.scale.set(0,0,1);s.ww=ww;s.ar=.3;s.i=-1;
+ s.upd=()=>{if(s.i<0)return;const v=src[s.i][document.documentElement.lang=='fr'?0:1],ln=[];let cu='';v.split(' ').forEach(w=>{if((cu+' '+w).trim().length>lw){ln.push(cu);cu=w}else cu=(cu+' '+w).trim()});ln.push(cu);
+  const lh=fs+8,bh=ln.length*lh+22,H=bh+34,tx=W*f;c.width=W;c.height=H;x.fillStyle='#fff';x.strokeStyle='#10143a';x.lineWidth=6;x.fillRect(6,6,W-12,bh);x.strokeRect(6,6,W-12,bh);
+  x.beginPath();x.moveTo(tx-20,bh+6);x.lineTo(tx,H-3);x.lineTo(tx+14,bh+6);x.closePath();x.fill();x.stroke();x.fillStyle='#fff';x.fillRect(tx-15,bh,28,10);
+  x.fillStyle='#10143a';x.font='bold '+fs+'px monospace';x.textAlign='center';x.textBaseline='middle';ln.forEach((l,j)=>x.fillText(l,W/2,17+lh*(j+.5)));s.ar=H/W;t.needsUpdate=true};
+ s.set2=i=>{if(i!=s.i){s.i=i;s.upd()}};SP.push(s);sc.add(s);return s}
+const cb=speech(3.8,[['Je perds un temps fou à repérer les fractures sur 16000 radios.','I lose so much time spotting fractures on 16,000 X-rays.'],['Nos agents sont débordés par les mêmes demandes clients.','Our agents are swamped by the same customer requests.'],['Comment recommander le bon produit parmi des millions d’avis ?','How do we recommend the right product among millions of reviews?']],22,28,400,.3);
+const ab=speech(3.8,[['Donc l’objectif : un outil d’aide au diagnostic fiable, sur données propres.','So the goal: a reliable diagnostic-support tool on clean data.'],['Donc l’objectif : classer les demandes automatiquement et réduire les escalades.','So the goal: classify requests automatically and cut escalations.'],['Donc l’objectif : un système de recommandation qui exploite ces avis.','So the goal: a recommender system that makes use of these reviews.']],22,28,400,.78);
+const sk=speech(6.2,[['J’utilise mes compétences pour transformer des données éparpillées en données propres et utilisables pour notre besoin, et en vérifier la qualité.','I use my skills to turn scattered data into clean, usable data for our need, and to check its quality.']],17,52,560,.25);
+
+/* ---------- bulle « Contactez-moi » ---------- */
+const bub=(()=>{const c=document.createElement('canvas');c.width=256;c.height=128;const x=c.getContext('2d'),t=new T3.CanvasTexture(c);t.minFilter=t.magFilter=T3.NearestFilter;
+ const s=new T3.Sprite(new T3.SpriteMaterial({map:t,transparent:true,depthWrite:false,depthTest:false}));s.scale.set(0,0,1);
+ s.set=v=>{x.clearRect(0,0,256,128);x.fillStyle='#fff';x.strokeStyle='#10143a';x.lineWidth=6;x.fillRect(6,6,244,80);x.strokeRect(6,6,244,80);x.beginPath();x.moveTo(104,86);x.lineTo(124,122);x.lineTo(138,86);x.closePath();x.fill();x.stroke();x.fillStyle='#fff';x.fillRect(110,80,26,10);x.fillStyle='#10143a';x.font='bold 24px monospace';x.textAlign='center';x.textBaseline='middle';x.fillText(v,128,47);t.needsUpdate=true};
+ LB.push({s,fr:'Contactez-moi !',en:'Contact me!'});sc.add(s);return s})();
+
+/* ---------- groupe de données (chaos -> graphique) ---------- */
+const N=360,dg=new T3.Group();sc.add(dg);
+const im=new T3.InstancedMesh(new T3.BoxGeometry(.45,.45,.45),new T3.MeshLambertMaterial(),N);dg.add(im);
+const CH=[0xff5a5a,0xffb454,0x8a8fa8,0xe9e9ff,0xb15cff].map(c=>new T3.Color(c));
+const W=[...Array(40)].map((_,s)=>.4+Math.sin((s>>1)*.6+.8)**2*1.2),sw=W.reduce((a,b)=>a+b),hs=W.map(w=>Math.floor(w/sw*N));
+let rem=N-hs.reduce((a,b)=>a+b);for(let s=0;rem>0;s=(s+1)%40,rem--)hs[s]++;
+const D=[];hs.forEach((h,s)=>{for(let k=0;k<h;k++)D.push({tx:((s>>1)-9.5)*.52,ty:.25+k*.5,tz:-6-(s&1)*.52,c1:new T3.Color().setHSL(.58,.8,.4+.3*k/14),c0:CH[Math.random()*5|0],
+ cx:(Math.random()-.5)*26,cy:.5+Math.random()*9,cz:-11+Math.random()*9.5,s:.5+Math.random(),p:Math.random()*6,a:.3+Math.random()*.6})});
+const NS=['NaN','null','0.87','#@!','404','∞','−1','42%','1e9','?','Δ','NA'];
+const ns=[...Array(22)].map((_,i)=>{const c=document.createElement('canvas');c.width=128;c.height=64;const x=c.getContext('2d');x.fillStyle=i%2?'#ff8a8a':'#9fb0ff';x.font='bold 40px monospace';x.textAlign='center';x.fillText(NS[i%12],64,46);
+ const s=new T3.Sprite(new T3.SpriteMaterial({map:new T3.CanvasTexture(c),transparent:true,depthWrite:false}));s.scale.set(2,1,1);s.userData={x:(Math.random()-.5)*24,y:1+Math.random()*9,z:-9+Math.random()*7,p:Math.random()*6};dg.add(s);return s});
+
+/* ---------- sol + scènes ---------- */
+{const c=document.createElement('canvas');c.width=c.height=2;const x=c.getContext('2d');x.fillStyle='#26305c';x.fillRect(0,0,2,2);x.fillStyle='#2f3b70';x.fillRect(0,0,1,1);x.fillRect(1,1,1,1);
+ const t=new T3.CanvasTexture(c);t.magFilter=t.minFilter=T3.NearestFilter;t.wrapS=t.wrapT=T3.RepeatWrapping;t.repeat.set(75,25);
+ const f=new T3.Mesh(new T3.PlaneGeometry(150,50),new T3.MeshLambertMaterial({map:t}));f.rotation.x=-Math.PI/2;f.position.set(35,0,-8);sc.add(f)}
+const G=[...Array(6)].map((_,i)=>{const g=new T3.Group();g.position.x=i*14;sc.add(g);return g});
+const hov=[];
+// Scène 1 : clients
+const npcs=[[3.2,.5,0xf2f2f2,0x2b2b2b,'SANTÉ','HEALTH'],[4.6,-1.2,0xff9a3c,0x6b3b1e,'SUPPORT','SUPPORT'],[6,-2.4,0x5a6b8a,0x111111,'E-COMMERCE','E-COMMERCE']].map((n,i)=>{
+ const p=person({top:n[2],hair:n[3],shirt:0});p.g.position.set(n[0],0,n[1]);p.g.rotation.y=-1.25;G[1].add(p.g);const l=label(n[4],n[5]);l.position.set(n[0],5.7,n[1]);G[1].add(l);return{p,l}});
+// Scène 2 : outils
+const TL=[['Python',0x3b82f6],['PyTorch',0xff6a3d],['Scikit',0xffb454],['FastAPI',0x2fd4a0],['Docker',0x38b6ff],['MLflow',0x5ab0ff],['Azure',0x7a8cff]];
+const gems=TL.map((t,i)=>{const px=2.6+(i%4)*2.1,pz=-.5-(i>>2)*2.6;bx(1.3,.7,1.3,0x555d8a,px,.35,pz,G[2]);const m=bx(.8,.8,.8,t[1],px,1.7,pz,G[2]);const l=label(t[0],null,2.6,'#fff','#1a2350');l.position.set(px,3,pz);G[2].add(l);return m});
+const bg=new T3.BufferGeometry();bg.setAttribute('position',new T3.BufferAttribute(new Float32Array(6),3));const beam=new T3.Line(bg,new T3.LineBasicMaterial({color:0x7fe7ff}));beam.frustumCulled=false;sc.add(beam);
+// Scène 3 : écrans holographiques
+[[scr('bars','YOLO mAP@50','50.1 %'),1,5.4,-1.8,.35],[scr('dots','O2MAC SILHOUETTE','0.338'),5,6.1,-3,-.1],[scr('net','MULTI-AGENT RECSYS','4.6 M'),8.2,4.4,-1.5,-.4],[scr('line','PARKINSON RECALL','85.7 %'),3.2,3.1,-4,.15],[scr('dots','PARKING ERROR','<0.69 m'),7.2,7.1,-4.5,-.2]].forEach(a=>{a[0].position.set(a[1],a[2],a[3]);a[0].userData.ry=a[4];G[3].add(a[0]);hov.push(a[0])});
+// Scène 4 : formation
+const bld=(x,z,w,h,c,n)=>{bx(w,h,w,c,x,h/2,z,G[4]);bx(w+.4,.4,w+.4,0xffc84a,x,h+.2,z,G[4]);for(let i=0;i<3;i++)for(let j=0;j<(h/1.5|0);j++)bx(.5,.5,.1,0xfff2a8,x-w/3+i*w/3,1.2+j*1.4,z+w/2+.02,G[4]);const l=label(n,null,3.2,'#fff','#1a2350');l.position.set(x,h+1.5,z);G[4].add(l)};
+bld(3.5,-2,3.2,4.5,0x7d4cdb,'SESAME');bld(7.6,-3,3.2,5.5,0x2f9e8f,'CY TECH');
+for(let i=0;i<12;i++)bx(1,.05,1.4,0xe2b04a,-3+i*1.2,.03,1,G[4]);
+const certs=['AI-900','DIFFUSION','TRANSFORMER','DEEP LEARN.','SNOWFLAKE'].map((c,i)=>{const x=1+i*2,m=bx(.45,.45,.45,0xfff3c8,x,1.5,2.6,G[4]);const l=label(c,null,1.5,'#ffe08a','#2a2108',22);l.position.set(x,2.3+(i%2)*.55,2.6);G[4].add(l);return m});
+const flags=[];
+function flag(k,x,z){const c=document.createElement('canvas');c.width=120;c.height=80;const q=c.getContext('2d');
+ if(k=='tn'){q.fillStyle='#e70013';q.fillRect(0,0,120,80);q.fillStyle='#fff';q.beginPath();q.arc(60,40,27,0,7);q.fill();q.fillStyle='#e70013';q.beginPath();q.arc(56,40,19,0,7);q.fill();q.fillStyle='#fff';q.beginPath();q.arc(63,40,15,0,7);q.fill();q.fillStyle='#e70013';q.beginPath();for(let i=0;i<10;i++){const r=i%2?4:9,a=i*Math.PI/5-Math.PI/2;q.lineTo(64+r*Math.cos(a),40+r*Math.sin(a))}q.fill()}
+ else{q.fillStyle='#0055a4';q.fillRect(0,0,40,80);q.fillStyle='#fff';q.fillRect(40,0,40,80);q.fillStyle='#ef4135';q.fillRect(80,0,40,80)}
+ const t=new T3.CanvasTexture(c);t.magFilter=t.minFilter=T3.NearestFilter;bx(.12,4.4,.12,0xcccccc,x,2.2,z,G[4]);
+ const m=new T3.Mesh(new T3.PlaneGeometry(2,1.33),new T3.MeshBasicMaterial({map:t,side:T3.DoubleSide}));m.position.set(x+1.02,3.7,z);G[4].add(m);flags.push(m)}
+flag('tn',1.7,.2);flag('fr',5.8,-.2);
+const pl=new T3.Group();G[4].add(pl);[[2.4,.5,.5,0xffffff,0,0,0],[.5,.4,.4,0xe74c3c,1.4,0,0],[.7,.1,3.2,0xdfe8ff,.1,-.05,0],[.5,.8,.1,0xe74c3c,-1.1,.5,0],[.4,.1,1.2,0xdfe8ff,-1.1,.1,0],[.15,.15,.52,0x4aa3ff,-.4,.1,0],[.15,.15,.52,0x4aa3ff,.1,.1,0],[.15,.15,.52,0x4aa3ff,.6,.1,0]].forEach(a=>bx(a[0],a[1],a[2],a[3],a[4],a[5],a[6],pl));pl.scale.setScalar(1.1);
+// Scène 5 : dashboards + parterre de stakeholders
+[[scr('line','DATA QUALITY','−42.27 %'),-3.6],[scr('donut','ESCALATIONS','−25 %'),1.2],[scr('bars','API LATENCY','< 0.1 s'),6]].forEach(a=>{a[0].position.set(a[1],5.3,-4.2);G[5].add(a[0]);hov.push(a[0])});
+const aud=[0x2b2f3a,0x1f2a44,0x3a3a3a,0x14181f,0x2f3b52,0x40404a].map((c,i)=>{const p=person({top:c,hair:[0x222222,0x6b3b1e,0x111111,0x8b6b3a,0x222222,0x3a2314][i],pants:c,shirt:1,tie:[0xc0392b,0x2e86de,0xc0392b,0xf1c40f,0x2e86de,0xc0392b][i],skin:[0xd9a27a,0xf0c8a0,0x8d5a3b,0xe0b090,0xc68642,0xf0c8a0][i]});p.g.position.set(-5.5+(i%3)*1.7,0,1.6+(i>>1>>1)*2.2);p.g.rotation.y=1.5;p.g.scale.setScalar(.9);G[5].add(p.g);return p});
+
+/* ---------- caméra / scroll ---------- */
+const K=[{r:0,c:[0,3.4,12],l:[0,2.3,0]},{r:1.25,c:[3,3.6,11.5],l:[3,2.2,0]},{r:1,c:[2,3.2,10.5],l:[2.2,2.2,-.5]},{r:.35,c:[1.5,3.8,12],l:[3,3,-1.5]},{r:0,c:[2,3.6,11],l:[2.5,3,-2]},{r:-1.57,c:[1.2,3.4,11],l:[1.4,2.8,0]}];
+const ptr=new T3.Vector2(),ray=new T3.Raycaster(),clk=new T3.Clock(),v=new T3.Vector3();let shift=0;
+addEventListener('pointermove',e=>{ptr.set(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight)*2+1)});
+function rs(){R.setSize(innerWidth,innerHeight,false);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();shift=innerWidth>900?-3.2:0}
+addEventListener('resize',rs);rs();
+const secs=$$('.sc');
+function Fof(y){const vh=innerHeight,mx=document.documentElement.scrollHeight-vh,c=secs.map((e,i)=>i==0?0:i==5?mx:e.offsetTop+e.offsetHeight/2-vh/2),d=secs.map(e=>Math.max(0,(e.offsetHeight-1.6*vh)/2));
+ for(let i=0;i<5;i++){const a=c[i]+d[i],b=Math.max(a+1,c[i+1]-d[i+1]);if(y<a)return i;if(y<b)return i+(y-a)/(b-a)}return 5}
+const vw={yaw:0,pitch:0,px:0,py:0},vt={yaw:0,pitch:0,px:0,py:0};let drag=null,idle=0;
+let F=0,walk=0,pax=0,ry=0;
+function frame(){requestAnimationFrame(frame);
+ const dt=Math.min(clk.getDelta(),.05),T=clk.elapsedTime,P=cl(scrollY/Math.max(1,document.documentElement.scrollHeight-innerHeight));
+ F+=(Fof(scrollY)-F)*(1-Math.exp(-dt*6));const i=Math.min(4,Math.floor(F)),t=F-i,e=sm(cl((t-.25)/.5)),a=K[i],b=K[i+1];
+ K[5].r=-1.57+1.57*sm(cl((F-4.88)/.12));const turned=sm(cl((F-4.88)/.12));
+ const ax=(i+e)*14,n=k=>Math.max(0,1-Math.abs(F-k)*2.2);
+ const off=2.6*sm(cl((F-4.72)/.16)),avx=ax+off;walk+=(cl(Math.abs(avx-pax)/Math.max(dt,.001)/5)-walk)*.2;pax=avx;
+ // avatar
+ const tr=lp(a.r,b.r,e)*(1-walk)+1.571*walk;ry+=(tr-ry)*.12;av.g.rotation.y=ry;av.g.position.set(avx,Math.abs(Math.sin(T*9))*.12*walk,0);
+ const s9=Math.sin(T*9)*.7*walk;av.L.rotation.x=s9;av.R.rotation.x=-s9;av.A.rotation.set(-s9*.8,0,.05);av.B.rotation.set(s9*.8,0,-.05);
+ const ps=(m,x,z,w)=>{m.rotation.x+=(x-m.rotation.x)*w;m.rotation.z+=(z-m.rotation.z)*w},k=1-walk;
+ ps(av.B,0,2.4+Math.sin(T*8)*.4,n(0)*k);
+ const w1=n(1)*k;ps(av.A,-1.4+Math.sin(T*5)*.5,0,w1);ps(av.B,-1.4+Math.sin(T*5+2)*.5,0,w1);
+ hc.visible=w1>.05;hc.material.color.setHSL(.58*(Math.sin(T*1.5)+1)/2,.8,.55);
+ const w2=n(2)*k;ps(av.A,-1.1+Math.sin(T*14)*.12,0,w2);ps(av.B,-1.1+Math.cos(T*14)*.12,0,w2);
+ const w3=n(3)*k;ps(av.B,-1.5,.3,w3);ps(av.A,-.2,-.3,w3);ps(av.A,-.3,-.5,n(4)*k);
+ const w5=n(5)*k;ps(av.A,-1.2,0,w5*(1-turned));ps(av.B,0,2.4+Math.sin(T*8)*.4,w5*turned);
+ av.h.rotation.y=Math.sin(T*.8)*.2;cap.visible=F>3.6;
+ const bk=cl((turned-.5)/.5),bs=1+2.7*(bk-1)**3+1.7*(bk-1)**2;bub.scale.set(4.2*bs,2.1*bs,1);bub.position.set(avx,6.3+Math.sin(T*2)*.1,.5);
+ const pr=cl((scrollY+innerHeight*.5-secs[1].offsetTop)/secs[1].offsetHeight),u=cl((pr-.2)/.6),ph=Math.min(2,Math.floor(u*3)),sb=u*3-ph,ok=(u>0&&u<1)?cl((n(1)-.3)/.2):0,fo=cl((1-sb)/.08),pop=q=>1+2.7*(q-1)**3+1.7*(q-1)**2;
+ if(ok>0){cb.set2(ph);ab.set2(ph)}
+ const sp=(b,q,x,y,z)=>{const m=pop(cl(q));b.scale.set(b.ww*m,b.ww*b.ar*m,1);b.position.set(x,y,z)},np=npcs[ph].p.g.position;
+ sp(cb,cl((sb-.02)/.12)*ok*fo,14+np.x,4.85,np.z+.3);sp(ab,cl((sb-.45)/.12)*ok*fo,avx+.2,5.15,.6);
+ sk.set2(0);sp(sk,cl((n(2)-.3)/.25),avx+.2,5.1,.6);
+ // données
+ const o=sm(cl((F-.6)/1.9)),w=1-o,c=new T3.Color(),d=new T3.Object3D();dg.position.x=ax;
+ for(let j=0;j<N;j++){const q=D[j];d.position.set(lp(q.cx,q.tx,o)+Math.sin(T*q.s+q.p)*q.a*w,lp(q.cy,q.ty,o)+Math.cos(T*q.s+q.p)*q.a*w,lp(q.cz,q.tz,o));d.rotation.set(w*q.p,w*(T*q.s+q.p),0);d.updateMatrix();im.setMatrixAt(j,d.matrix);im.setColorAt(j,c.copy(q.c0).lerp(q.c1,o))}
+ im.instanceMatrix.needsUpdate=true;im.instanceColor.needsUpdate=true;
+ ns.forEach(s=>{const u=s.userData;s.position.set(u.x+Math.sin(T+u.p)*.6,u.y+Math.cos(T*.8+u.p)*.5,u.z);s.material.opacity=1-o*.95});
+ // scènes
+ npcs.forEach((q,j)=>{q.l.position.y=5.7+Math.sin(T*2+j)*.15;q.p.h.rotation.y=Math.sin(T+j)*.3;q.l.visible=!(cb.scale.x>.3&&j==ph)});
+ gems.forEach((m,j)=>{m.rotation.y=T+j;m.position.y=1.7+Math.sin(T*2+j)*.15});certs.forEach((m,j)=>{m.rotation.y=T*1.5;m.position.y=1.5+Math.sin(T*2+j)*.12});const pph=Math.sin(T*.7);pl.position.set(5.55+2.6*pph,6.8+Math.sin(T*1.4)*.25,.5);pl.rotation.y=Math.cos(T*.7)>0?0:Math.PI;pl.rotation.z=-.12*Math.abs(Math.cos(T*.7));flags.forEach((f,j)=>f.rotation.y=Math.sin(T*3+j)*.25);
+ aud.forEach((q,j)=>q.h.rotation.x=Math.sin(T*2+j)*.08);
+ beam.visible=n(2)*k>.1;if(beam.visible){av.g.updateMatrixWorld(true);av.B.localToWorld(v.set(0,-1.3,0));const g=gems[Math.floor(T*1.2)%7],p=bg.attributes.position;p.setXYZ(0,v.x,v.y,v.z);g.getWorldPosition(v);p.setXYZ(1,v.x,v.y,v.z);p.needsUpdate=true}
+ ray.setFromCamera(ptr,cam);const hit=ray.intersectObjects(hov)[0];
+ hov.forEach((m,j)=>{const s=hit&&hit.object==m?1.15:1;m.scale.x+=(s-m.scale.x)*.15;m.scale.y=m.scale.x;if(m.userData.ry!=null)m.rotation.y=m.userData.ry+Math.sin(T+j)*.08});
+ // caméra + ciel
+ const C=[0,1,2].map(z=>lp(a.c[z],b.c[z],e)),Lk=[0,1,2].map(z=>lp(a.l[z],b.l[z],e));
+ const YU=1.4;for(const k in vw)vw[k]+=(vt[k]-vw[k])*.14;if(!drag&&T-idle>2.5)for(const k in vt)vt[k]*=.94;
+ const tgx=ax+Lk[0]+shift,tgy=Lk[1]+YU,tgz=Lk[2],cx=ax+C[0]+shift+ptr.x*.8-tgx,cy=C[1]+YU+ptr.y*.3-tgy,cz=C[2]-tgz;
+ const rr=Math.hypot(cx,cy,cz),th=Math.atan2(cx,cz)+vw.yaw,ph2=cl(Math.asin(cy/rr)+vw.pitch,-.15,1.15),cp=Math.cos(ph2),ox=Math.cos(th)*vw.px,oy=vw.py,oz=-Math.sin(th)*vw.px;
+ cam.position.set(tgx+rr*Math.sin(th)*cp+ox,tgy+rr*Math.sin(ph2)+oy,tgz+rr*Math.cos(th)*cp+oz);cam.lookAt(tgx+ox,tgy+oy,tgz+oz);
+ sc.background.copy(BG0).lerp(BG1,F/5);sc.fog.color.copy(sc.background);
+ cam.updateMatrixWorld();
+ R.render(sc,cam)}
+frame();
+
+/* ---------- ScrollTrigger, langue, formulaire ---------- */
+gsap.registerPlugin(ScrollTrigger);
+const dots=$$('nav a');
+$$('.sc').forEach((s,i)=>ScrollTrigger.create({trigger:s,start:'top 55%',end:'bottom 55%',toggleClass:{targets:[s,dots[i]],className:'on'}}));
+gsap.from('header',{y:-30,opacity:0,duration:.8});
+const hint=$('#hint'),UI='.card,header,a,button,input,textarea';
+addEventListener('mousedown',e=>{if(e.button==1&&!e.target.closest(UI))e.preventDefault()});
+addEventListener('pointerdown',e=>{if(e.pointerType=='touch'||e.button>2||(e.button==0&&e.target.closest(UI)))return;drag={b:e.button};document.body.classList.add('drag');hint.style.opacity=0;try{document.documentElement.requestPointerLock()}catch(x){}});
+addEventListener('pointermove',e=>{if(!drag)return;const dx=e.movementX||0,dy=e.movementY||0;
+ if(drag.b==1||e.shiftKey){vt.px=cl(vt.px-dx*.012,-7,7);vt.py=cl(vt.py+dy*.012,-4,4)}else{vt.yaw=cl(vt.yaw-dx*.005,-1.3,1.3);vt.pitch=cl(vt.pitch+dy*.004,-.6,.8)}});
+const endDrag=()=>{if(!drag)return;drag=null;idle=clk.elapsedTime;document.body.classList.remove('drag');try{document.exitPointerLock()}catch(x){}};
+addEventListener('pointerup',endDrag);addEventListener('pointercancel',endDrag);
+addEventListener('contextmenu',e=>{if(!e.target.closest(UI))e.preventDefault()});
+setTimeout(()=>hint.style.opacity=0,14000);
+const pgs=$$('.pg');ScrollTrigger.create({trigger:'#s3',start:'top 30%',end:'bottom 70%',onUpdate:q=>{const k=Math.min(4,Math.floor(q.progress*5));pgs.forEach((p,j)=>p.classList.toggle('on',j==k));$('#pn').textContent=(k+1)+' / 5'}});
+let lang='fr';try{lang=localStorage.getItem('lang')||(navigator.language.startsWith('fr')?'fr':'en')}catch(e){}
+function setLang(l,fast){const go=()=>{document.documentElement.lang=l;lang=l;$('#lg').textContent=l=='fr'?'EN':'FR';LB.forEach(o=>o.s.set(o[l]));SP.forEach(b=>b.upd());try{localStorage.setItem('lang',l)}catch(e){}document.body.classList.remove('sw')};
+ fast?go():(document.body.classList.add('sw'),setTimeout(go,230))}
+$('#lg').onclick=()=>setLang(lang=='fr'?'en':'fr');setLang(lang,true);
+})();
+</script>
+</body>
+</html>
